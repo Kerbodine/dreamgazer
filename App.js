@@ -5,12 +5,14 @@ import styled from "styled-components/native";
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/theme";
 import { StackNaviagator } from "./src/navigation/stack";
+import Login from "./src/screens/auth/login";
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <NavigationContainer>
         <StackNaviagator />
+        {/* <Login /> */}
       </NavigationContainer>
     </ThemeProvider>
   );

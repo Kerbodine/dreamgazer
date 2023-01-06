@@ -1,20 +1,11 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Settings, Text, TouchableOpacity, View } from "react-native";
-import { SvgXml } from "react-native-svg";
+import { Text, TouchableOpacity, View } from "react-native";
 import styled from "styled-components/native";
-import HomeIcon from "../icons/home";
-import CalendarIcon from "../icons/calendar";
 import { ThemeContext } from "styled-components/native";
 import { useContext } from "react";
 import Icon from "react-native-vector-icons/Feather";
-
-const HomeScreen = () => {
-  return (
-    <View>
-      <Text>Home</Text>
-    </View>
-  );
-};
+import HomeScreen from "../screens/Home";
+import GalleryScreen from "../screens/GalleryScreen";
 
 const CalendarScreen = () => {
   return (
@@ -40,13 +31,6 @@ const SettingsScreen = () => {
   );
 };
 
-const ImagesScreen = () => {
-  return (
-    <View>
-      <Text>Images</Text>
-    </View>
-  );
-};
 const Tab = createBottomTabNavigator();
 
 const TabBar = styled(Tab.Navigator).attrs({
@@ -57,12 +41,14 @@ const TabBar = styled(Tab.Navigator).attrs({
       position: "absolute",
       borderTopLeftRadius: 16,
       borderTopRightRadius: 16,
-      borderBottomLeftRadius: 32,
-      borderBottomRightRadius: 32,
-      height: 100,
+      height: 96,
       paddingLeft: 12,
       paddingRight: 12,
       borderTopWidth: 0,
+      shadowColor: (props) => props.theme.colors.black,
+      shadowOffset: { width: -2, height: 4 },
+      shadowOpacity: 0.25,
+      shadowRadius: 4,
     },
   },
 })``;
@@ -143,7 +129,7 @@ const Tabs = ({ navigation }) => {
       />
       <Tab.Screen
         name="Images"
-        component={ImagesScreen}
+        component={GalleryScreen}
         options={{
           tabBarIcon: ({ focused }) => (
             <NavIcon>

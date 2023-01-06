@@ -28,6 +28,7 @@ export const StackNaviagator = () => {
     >
       <Stack.Screen name="Main" component={Tabs} />
       <Stack.Screen name="New entry" component={Journal} />
+      <Stack.Screen name="Image detail" component={DetailsScreen} />
     </Stack.Navigator>
   );
 };
