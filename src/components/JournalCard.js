@@ -1,6 +1,8 @@
-import { View, Text } from "react-native";
+import { View, Text, TouchableWithoutFeedback } from "react-native";
 import React from "react";
 import styled from "styled-components/native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
 
 const Card = styled.View`
   border-radius: 10px;
@@ -20,10 +22,20 @@ const JournalText = styled.Text`
 `;
 
 export default function JournalCard() {
+  const navigation = useNavigation();
+
   return (
     <Card>
-      <JournalTitle>Jan 6 2022</JournalTitle>
-      <JournalText>Today was a good day</JournalText>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("Journal detail");
+        }}
+      >
+        <View>
+          <JournalTitle>Jan 6 2022</JournalTitle>
+          <JournalText>Today was a good day</JournalText>
+        </View>
+      </TouchableOpacity>
     </Card>
   );
 }

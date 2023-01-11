@@ -1,11 +1,14 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, View } from "react-native";
 import styled from "styled-components/native";
 import { ThemeContext } from "styled-components/native";
 import { useContext } from "react";
 import Icon from "react-native-vector-icons/Feather";
-import HomeScreen from "../screens/Home";
+import HomeScreen from "../screens/HomeScreen";
 import GalleryScreen from "../screens/GalleryScreen";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { ImpactFeedbackStyle, impactAsync } from "expo-haptics";
+import { SettingsStack } from "../screens/settings/SettingsStack";
 
 const CalendarScreen = () => {
   return (
@@ -23,18 +26,11 @@ const PostScreen = () => {
   );
 };
 
-const SettingsScreen = () => {
-  return (
-    <View>
-      <Text>Settings</Text>
-    </View>
-  );
-};
-
 const Tab = createBottomTabNavigator();
 
 const TabBar = styled(Tab.Navigator).attrs({
   screenOptions: {
+    headerShown: false,
     tabBarShowLabel: false,
     tabBarStyle: {
       backgroundColor: "#fff",
@@ -53,7 +49,7 @@ const TabBar = styled(Tab.Navigator).attrs({
   },
 })``;
 
-const NavButtonCircle = styled(TouchableOpacity)`
+const NavButtonCircle = styled(TouchableWithoutFeedback)`
   width: 64px;
   height: 64px;
   border-radius: 32px;
@@ -62,6 +58,7 @@ const NavButtonCircle = styled(TouchableOpacity)`
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);
 `;
 
 const Dot = styled(View)`
@@ -121,7 +118,13 @@ const Tabs = ({ navigation }) => {
         component={PostScreen}
         options={{
           tabBarButton: () => (
-            <NavButtonCircle onPress={() => navigation.navigate("New entry")}>
+            <NavButtonCircle
+              onPress={() => {
+                // haptic feedback
+                impactAsync(ImpactFeedbackStyle.Light);
+                navigation.navigate("New entry");
+              }}
+            >
               <Icon name="plus" size={32} color={theme.colors.white} />
             </NavButtonCircle>
           ),
@@ -145,7 +148,7 @@ const Tabs = ({ navigation }) => {
       />
       <Tab.Screen
         name="Settings"
-        component={SettingsScreen}
+        component={SettingsStack}
         options={{
           tabBarIcon: ({ focused }) => (
             <NavIcon>

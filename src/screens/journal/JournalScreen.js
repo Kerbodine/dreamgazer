@@ -8,16 +8,19 @@ import {
   WordCount,
   ButtonText,
 } from "./styles";
+import JournalDate from "../../components/JournalDate";
+import { ImpactFeedbackStyle, impactAsync } from "expo-haptics";
 
 const MAX_LENGTH = 180;
 
-export default function Journal({ navigation }) {
+export default function JournalScreen({ navigation }) {
   const [journalInput, setJournalInput] = useState("");
 
   const theme = useContext(ThemeContext);
 
   return (
     <Container>
+      <JournalDate />
       <Title>Whats on your mind?</Title>
       <ResponseField
         onChangeText={setJournalInput}
@@ -33,6 +36,7 @@ export default function Journal({ navigation }) {
       />
       <ContinueButton
         onPress={() => {
+          impactAsync(ImpactFeedbackStyle.Light);
           navigation.goBack();
         }}
       >

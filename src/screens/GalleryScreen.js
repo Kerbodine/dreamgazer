@@ -1,13 +1,13 @@
 import React from "react";
 import { FlatList } from "react-native";
 import ImageCard from "../components/ImageCard";
-import { ImagePlaceholder, PageContainer } from "./styles";
+import { ImagePlaceholder, SafeArea } from "./styles";
 
 const DATA = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const GalleryScreen = ({ navigation }) => {
   return (
-    <PageContainer>
+    <SafeArea>
       <FlatList
         data={
           // check if odd, then add one to make it even
@@ -18,12 +18,9 @@ const GalleryScreen = ({ navigation }) => {
         }
         keyExtractor={(item) => item.toString()}
         numColumns={2}
-        contentContainerStyle={{
-          padding: 8,
-        }}
         showsVerticalScrollIndicator={false}
       />
-    </PageContainer>
+    </SafeArea>
   );
 };
 
