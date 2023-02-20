@@ -8,8 +8,9 @@ const Card = styled.View`
   border-radius: 10px;
   padding: 16px;
   margin-bottom: 16px;
-  border: 1px solid ${(props) => props.theme.colors.black};
+  background-color: ${(props) => props.theme.colors.white};
 `;
+// border: 1px solid ${(props) => props.theme.colors.black};
 
 const JournalTitle = styled.Text`
   font-size: 18px;
@@ -17,11 +18,18 @@ const JournalTitle = styled.Text`
   margin-bottom: 4px;
 `;
 
-const JournalText = styled.Text`
+const JournalDate = styled.Text`
   font-size: 16px;
+  margin-bottom: 4px;
+  color: ${(props) => props.theme.colors.secondary};
 `;
 
-export default function JournalCard({ item: { createdAt, text } }) {
+const JournalText = styled.Text`
+  font-weight: 500;
+  font-size: 18px;
+`;
+
+export default function JournalCard({ item: { createdAt, text, prompt } }) {
   const navigation = useNavigation();
 
   return (
@@ -34,8 +42,17 @@ export default function JournalCard({ item: { createdAt, text } }) {
         <View>
           <JournalTitle>
             {/* created at date and time formatted */}
-            {new Date(createdAt).toLocaleString()}
+            {/* {new Date(createdAt).toLocaleString()} */}
+            {prompt}
           </JournalTitle>
+          <JournalDate>
+            {new Date(createdAt).toLocaleString([], {
+              month: "long",
+              day: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </JournalDate>
           <JournalText>{text}</JournalText>
         </View>
       </TouchableOpacity>

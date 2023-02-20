@@ -1,3 +1,4 @@
+import { Text } from "react-native";
 import styled from "styled-components/native";
 
 export const Container = styled.View`
@@ -8,11 +9,44 @@ export const Container = styled.View`
   padding: 96px 32px 0px;
 `;
 
-export const Title = styled.Text`
+export const RandomizeButton = styled.TouchableOpacity`
+  padding: 4px 8px;
+  border: 2px solid ${(props) => props.theme.colors.tertiary};
+  border-radius: 100px;
+  margin-top: 12px;
+  margin-bottom: 24px;
+`;
+
+export const RandomizeButtonText = styled.Text`
+  font-size: 18px;
+  font-weight: 500;
+  color: ${(props) => props.theme.colors.secondary};
+`;
+
+export const NoWrap = styled(Text).attrs((props) => ({
+  numberOfLines: 1,
+}))`
   font-size: 24px;
   letter-spacing: -0.25px;
   font-weight: bold;
 `;
+// background-color: ${(props) => props.theme.colors.tertiary};
+
+export const Row = styled.Text`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+`;
+
+export const Title = styled.Text`
+  font-size: 24px;
+  letter-spacing: -0.25px;
+  font-weight: bold;
+  display: inline;
+`;
+// background-color: ${(props) => props.theme.colors.secondary};
 
 export const ResponseField = styled.TextInput`
   margin-top: 32px;

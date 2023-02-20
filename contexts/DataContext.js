@@ -25,7 +25,7 @@ export function DataProvider({ children }) {
     console.log("LOADED JOURNALS" + journals);
   }, []);
 
-  const addJournal = async (createdAt, text, id) => {
+  const addJournal = async (createdAt, text, prompt, id) => {
     try {
       // get todays date in yyyy-mm-dd format
       const value = await AsyncStorage.getItem("journals");
@@ -34,6 +34,7 @@ export function DataProvider({ children }) {
         id,
         createdAt,
         text,
+        prompt,
         // prompt: "What's on your mind?",
       };
       if (parsedValue) {

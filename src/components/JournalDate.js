@@ -1,7 +1,6 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import React, { useState } from "react";
 import styled from "styled-components/native";
-import { useTheme } from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
@@ -21,9 +20,8 @@ const DateText = styled.Text`
   color: ${(props) => props.theme.colors.secondary};
 `;
 
-export default function JournalDate() {
+export default function JournalDate({ date, setDate }) {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  const [date, setDate] = useState(new Date());
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);

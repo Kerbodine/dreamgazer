@@ -1,10 +1,13 @@
 import { View, Text, ScrollView } from "react-native";
 import React from "react";
-import { Container, SafeArea } from "../styles";
+import { Container } from "../styles";
 import { SettingsCard, SettingsCardText, SettingsCardWrapper } from "./styles";
 import Icon from "react-native-vector-icons/Feather";
+import { useData } from "../../../contexts/DataContext";
 
 export default function SettingsScreen({ navigation }) {
+  const { deleteAllJournals } = useData();
+
   const SettingsItems = [
     {
       name: "About",
@@ -25,6 +28,14 @@ export default function SettingsScreen({ navigation }) {
       name: "Contact us",
       icon: "at-sign",
       action: () => {},
+    },
+    {
+      name: "Delete all journals",
+      icon: "trash-2",
+      action: () => {
+        deleteAllJournals();
+        navigation.navigate("Home");
+      },
     },
   ];
 

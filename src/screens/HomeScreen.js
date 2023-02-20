@@ -1,25 +1,62 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import JournalCard from "../components/JournalCard";
 import { Container, JournalList, SafeArea } from "./styles";
 import CalendarBar from "../components/CalendarBar";
 import { useData } from "../../contexts/DataContext";
-import { Text, TouchableOpacity } from "react-native";
+import { Image, Text } from "react-native";
 
 const HomeScreen = () => {
-  const { journals, deleteAllJournals } = useData();
+  const { journals } = useData();
+  const [currentDate, setCurrentDate] = useState(new Date());
+
+  const [filteredJournals, setFilteredJournals] = useState([]);
+
+  useEffect(() => {
+    setFilteredJournals(
+      journals.filter((journal) => {
+        const date = new Date(journal.createdAt);
+        return (
+          date.getFullYear() === currentDate.getFullYear() &&
+          date.getMonth() === currentDate.getMonth() &&
+          date.getDate() === currentDate.getDate()
+        );
+      })
+    );
+  }, [journals, currentDate]);
 
   return (
     <SafeArea>
-      <CalendarBar />
-      <TouchableOpacity onPress={deleteAllJournals}>
-        <Text>Delete all journals</Text>
-      </TouchableOpacity>
+      <CalendarBar currentDate={currentDate} setCurrentDate={setCurrentDate} />
       <Container>
-        <JournalList
-          data={journals}
-          renderItem={({ item }) => <JournalCard item={item} />}
-          keyExtractor={(item) => item.createdAt.toString()}
-        />
+        {filteredJournals.length > 0 ? (
+          <JournalList
+            data={filteredJournals}
+            renderItem={({ item }) => <JournalCard item={item} />}
+            keyExtractor={(item) => item.createdAt.toString()}
+          />
+        ) : (
+          <>
+            <Image
+              style={{
+                width: 320,
+                height: 320,
+                alignSelf: "center",
+                marginTop: 100,
+              }}
+              source={require("../../assets/empty.png")}
+            />
+            <Text
+              style={{
+                fontSize: 20,
+                fontWeight: "500",
+                textAlign: "center",
+                marginTop: 20,
+              }}
+            >
+              No entries found
+            </Text>
+          </>
+        )}
       </Container>
     </SafeArea>
   );
