@@ -21,7 +21,7 @@ const JournalText = styled.Text`
   font-size: 16px;
 `;
 
-export default function JournalCard() {
+export default function JournalCard({ item: { createdAt, text } }) {
   const navigation = useNavigation();
 
   return (
@@ -32,8 +32,11 @@ export default function JournalCard() {
         }}
       >
         <View>
-          <JournalTitle>Jan 6 2022</JournalTitle>
-          <JournalText>Today was a good day</JournalText>
+          <JournalTitle>
+            {/* created at date and time formatted */}
+            {new Date(createdAt).toLocaleString()}
+          </JournalTitle>
+          <JournalText>{text}</JournalText>
         </View>
       </TouchableOpacity>
     </Card>

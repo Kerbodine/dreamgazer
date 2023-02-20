@@ -10,7 +10,7 @@ const DateWrapper = styled(TouchableOpacity)`
   justify-content: space-between;
   align-items: center;
   padding: 4px 8px;
-  border-radius: 100%;
+  border-radius: 100px;
   border: 2px solid ${(props) => props.theme.colors.tertiary};
   margin-bottom: 16px;
 `;

@@ -29,19 +29,17 @@ export default function SettingsScreen({ navigation }) {
   ];
 
   return (
-    <SafeArea>
-      <Container>
-        <ScrollView>
-          <SettingsCardWrapper>
-            {SettingsItems.map((item, index) => (
-              <SettingsCard key={index} onPress={item.action}>
-                <Icon name={item.icon} size={20} color="#000" />
-                <SettingsCardText>{item.name}</SettingsCardText>
-              </SettingsCard>
-            ))}
-          </SettingsCardWrapper>
-        </ScrollView>
-      </Container>
-    </SafeArea>
+    <Container>
+      <ScrollView>
+        <SettingsCardWrapper>
+          {SettingsItems.map((item, index) => (
+            <SettingsCard key={index} onPress={item.action}>
+              <Icon name={item.icon} size={20} color="#000" />
+              <SettingsCardText>{item.name}</SettingsCardText>
+            </SettingsCard>
+          ))}
+        </SettingsCardWrapper>
+      </ScrollView>
+    </Container>
   );
 }

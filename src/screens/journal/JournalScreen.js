@@ -10,6 +10,8 @@ import {
 } from "./styles";
 import JournalDate from "../../components/JournalDate";
 import { ImpactFeedbackStyle, impactAsync } from "expo-haptics";
+import { useData } from "../../../contexts/DataContext";
+import uuid from "react-native-uuid";
 
 const MAX_LENGTH = 180;
 
@@ -17,6 +19,12 @@ export default function JournalScreen({ navigation }) {
   const [journalInput, setJournalInput] = useState("");
 
   const theme = useContext(ThemeContext);
+
+  const { addJournal } = useData();
+
+  const handleSubmit = async () => {
+    await addJournal(new Date().toISOString(), journalInput, uuid.v4());
+  };
 
   return (
     <Container>
@@ -37,6 +45,7 @@ export default function JournalScreen({ navigation }) {
       <ContinueButton
         onPress={() => {
           impactAsync(ImpactFeedbackStyle.Light);
+          handleSubmit();
           navigation.goBack();
         }}
       >

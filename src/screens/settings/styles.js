@@ -9,7 +9,7 @@ export const SettingsCard = styled(TouchableOpacity)`
 `;
 
 export const SettingsCardWrapper = styled.View`
-  margin-bottom: 16px;
+  margin-top: 24px;
   overflow: hidden;
   border-radius: 8px;
 `;
