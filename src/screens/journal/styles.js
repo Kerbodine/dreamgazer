@@ -9,15 +9,12 @@ export const Container = styled.View`
   padding: 96px 32px 0px;
 `;
 
-export const RandomizeButton = styled.TouchableOpacity`
+export const RoundedButton = styled.TouchableOpacity`
   padding: 4px 8px;
-  border: 2px solid ${(props) => props.theme.colors.tertiary};
   border-radius: 100px;
-  margin-top: 12px;
-  margin-bottom: 24px;
 `;
 
-export const RandomizeButtonText = styled.Text`
+export const ButtonText = styled.Text`
   font-size: 18px;
   font-weight: 500;
   color: ${(props) => props.theme.colors.secondary};
@@ -73,7 +70,7 @@ export const ContinueButton = styled.TouchableOpacity`
   border-radius: 32px;
 `;
 
-export const ButtonText = styled.Text`
+export const WhiteButtonText = styled.Text`
   font-size: 18px;
   font-weight: 500;
   color: ${(props) => props.theme.colors.white};

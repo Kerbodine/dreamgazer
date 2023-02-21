@@ -10,17 +10,16 @@ const DateWrapper = styled(TouchableOpacity)`
   align-items: center;
   padding: 4px 8px;
   border-radius: 100px;
-  border: 2px solid ${(props) => props.theme.colors.tertiary};
   margin-bottom: 16px;
 `;
 
 const DateText = styled.Text`
   font-size: 18px;
   font-weight: 500;
-  color: ${(props) => props.theme.colors.secondary};
 `;
+// color: ${(props) => props.theme.colors.secondary};
 
-export default function JournalDate({ date, setDate }) {
+export default function JournalDate({ date, setDate, textColor }) {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
   const showDatePicker = () => {
@@ -38,7 +37,11 @@ export default function JournalDate({ date, setDate }) {
 
   return (
     <DateWrapper onPress={showDatePicker}>
-      <DateText>
+      <DateText
+        style={{
+          color: `${textColor}`,
+        }}
+      >
         {date.toLocaleDateString([], {
           month: "long",
           day: "numeric",
